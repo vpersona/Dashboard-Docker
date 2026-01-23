@@ -57,7 +57,7 @@ def stats():
         #zapytania http do monitor
         cpu_data = requests.get("http://monitor:61208/api/4/cpu", timeout=1).json()
         mem_data = requests.get("http://monitor:61208/api/4/mem", timeout=1).json()
-        #parsowanie cpu iram
+        #parsowanie cpu i ram
         cpu = cpu_data[0].get('total', 0) if isinstance(cpu_data, list) else cpu_data.get('total', 0)
         ram = mem_data[0].get('percent', 0) if isinstance(mem_data, list) else mem_data.get('percent', 0)
 

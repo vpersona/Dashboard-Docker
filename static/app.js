@@ -1,9 +1,9 @@
-// Wysłanie zapytania do endpointu /api.ino, wstzrykiwanie danych do elementu HTML ktorego id to os-info
+// Wysłanie zapytania do endpointu /api/info, wstrzykiwanie danych do elementu HTML ktorego id to os-info
 fetch('/api/info').then(res => res.json()).then(data => {
         document.getElementById('os-info').innerText = `${data.node} | ${data.os} ${data.release}`;
     });
 
-    
+
  //Konfiguracja wykresu
 const ctx = document.getElementById('realtimeChart').getContext('2d');
     const chart = new Chart(ctx, {
@@ -60,7 +60,7 @@ function updateStats() {
             chart.data.labels.push(now);
             chart.data.datasets[0].data.push(cpu);
             chart.data.datasets[1].data.push(ram);
-            // Zmiana wyglądu przy wysokim ociążeniu
+            // Zmiana wyglądu przy wysokim obciążeniu
             if (cpu > 80) {
                     document.getElementById('cpu-text').style.color = 'red';
                     document.body.style.backgroundColor = '#2a0000'; 
