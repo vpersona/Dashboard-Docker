@@ -3,9 +3,10 @@
 Interaktywny panel monitorowania zasobów systemowych zbudowany w architekturze mikroserwisów przy użyciu Docker Compose.
 
 ## Opis projektu
-Projekt demonstruje zastosowanie konteneryzacji do budowy narzędzi monitorujących. System składa się z dwóch współpracujących usług:
+Projekt demonstruje zastosowanie konteneryzacji do budowy narzędzi monitorujących. System składa się z trzech współpracujących usług:
 1.  **Monitor (Glances):** Kontener zbierający dane systemowe bezpośrednio z hosta, udustępnia je przez REST API v4.
 2.  **Dashboard (Flask):** Aplikacja backendowa w Pythonie pobierająca dane z monitora, analizuje je i pokazuje interfejs użytkownika z wykresami w czasie rzeczywistym.
+3. **Baza Danych (Redis):** Szybka baza danych typu in-memory, przechowująca historię pomiarów CPU.
 
 ## Technologie
 * **Docker & Docker Compose** (Orkiestracja kontenerów)
@@ -13,6 +14,7 @@ Projekt demonstruje zastosowanie konteneryzacji do budowy narzędzi monitorując
 * **Chart.js** (Wizualizacja danych na frontendzie)
 * **Glances API** (Źródło danych systemowych)
 * **HTML5/CSS3** (Responsive Design)
+* **Redis** (Baza Danych)
 
 ## Architektura i Funkcje
 - **Microservices Communication:** Kontenery komunikują się wewnątrz sieci mostkowej (bridge) Dockera przy użyciu nazw usług.
@@ -47,3 +49,5 @@ Dzięki mapowaniu wolumenu w `docker-compose.yml`, wszystkie zdarzenia systemowe
 * `Dockerfile` - Instrukcja budowy obrazu dla dashboardu.
 * `templates/index.html` - Frontend aplikacji (HTML/JS/Chart.js).
 * `logs/` - Katalog (wolumen) z logami systemowymi.
+* `static/app.js` - Wyodręobniony JavaScript
+* `static/style.css` - Wyodrębione style dla index.html

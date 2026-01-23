@@ -2,23 +2,29 @@ version: '3.8'
 
 services:
   monitor:
-    image: nicolargo/glances:latest-full
+    image: nicolargo/glances:latest
     container_name: monitor_service
     restart: always
     environment:
       - "GLANCES_OPT=-w"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+     - //var/run/docker.sock:/var/run/docker.sock
     ports:
-      - "61208:61208"
+      - "55555:61208" #Port 55555 z tego względu, że system zaczął blokować mi port 61208 (a wcześniej działał, niestety nie doszłam do przyczyny problemu)
+    
 
   dashboard:
     build: .
     container_name: dashboard_service
     volumes:
       - ./logs:/app/logs
-      - /var/run/docker.sock:/var/run/docker.sock
+      - //var/run/docker.sock:/var/run/docker.sock
     ports:
       - "5000:5000"
     depends_on:
       - monitor
+
+  redis:
+      image: "redis:alpine"
+      container_name: redis_service
+      restart: always
